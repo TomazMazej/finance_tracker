@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:title="Delete"
+        android:icon="@drawable/ic_delete_black_24dp"
+        android:id="@+id/delete_category_btn"
+        app:showAsAction="ifRoom"
+        android:visible="false"/>
+
+    <item
+        android:title="Delete"
+        android:icon="@drawable/ic_delete_black_24dp"
+        android:id="@+id/delete_income_btn"
+        app:showAsAction="ifRoom"
+        android:visible="false"/>
+
+    <item
+        android:title="Delete"
+        android:icon="@drawable/ic_delete_black_24dp"
+        android:id="@+id/delete_account_btn"
+        app:showAsAction="ifRoom"
+        android:visible="false"/>
+
+    <item
+        android:title="Delete"
+        android:icon="@drawable/ic_delete_black_24dp"
+        android:id="@+id/delete_expense_btn"
+        app:showAsAction="ifRoom"
+        android:visible="false"/>
+
+    <item
+        android:title="AddIncome"
+        android:icon="@drawable/ic_add_circle_black_24dp"
+        android:id="@+id/add_income_btn"
+        app:showAsAction="ifRoom"
+        android:visible="false"/>
+
+    <item
+        android:title="AddExpense"
+        android:icon="@drawable/ic_add_circle_black_24dp"
+        android:id="@+id/add_expense_btn"
+        app:showAsAction="ifRoom"
+        android:visible="false"/>
+
+    <item
+        android:title="AddAccount"
+        android:icon="@drawable/ic_add_circle_black_24dp"
+        android:id="@+id/add_account_btn"
+        app:showAsAction="ifRoom"
+        android:visible="false"/>
+
+    <item
+        android:title="AddCategory"
+        android:icon="@drawable/ic_add_circle_black_24dp"
+        android:id="@+id/add_category_btn"
+        app:showAsAction="ifRoom"
+        android:visible="false"/>
+
+    <item
+        android:title="SelectDate"
+        android:id="@+id/date_range"
+        android:icon="@drawable/ic_date_range_black_24dp"
+        app:showAsAction="ifRoom"
+        android:visible="false">
+        <menu>
+            <item android:id="@+id/all"
+                android:title="All" />
+            <item android:id="@+id/today"
+                android:title="Today" />
+            <item android:id="@+id/month"
+                android:title="This Month" />
+        </menu>
+    </item>
+
+    <item android:title="General" android:id="@+id/general">
+        <menu>
+            <item
+                android:id="@+id/home"
+                android:icon="@drawable/ic_account_balance_black_24dp"
+                android:title="Home" />
+            <item
+                android:id="@+id/income"
+                android:icon="@drawable/ic_add_box_black_24dp"
+                android:title="Income" />
+            <item
+                android:id="@+id/expenses"
+                android:icon="@drawable/ic_indeterminate_check_box_black_24dp"
+                android:title="Expenses" />
+            <item
+                android:id="@+id/accounts"
+                android:icon="@drawable/ic_account_balance_wallet_black_24dp"
+                android:title="Accounts" />
+            <item
+                android:id="@+id/categories"
+                android:icon="@drawable/ic_work_black_24dp"
+                android:title="Categories" />
+        </menu>
+    </item>
+
+    <item android:title="Other" android:id="@+id/other">
+        <menu>
+            <item
+                android:id="@+id/settings"
+                android:icon="@drawable/ic_settings_applications_black_24dp"
+                android:title="Settings" />
+        </menu>
+    </item>
+</menu>

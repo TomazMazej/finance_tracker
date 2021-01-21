@@ -1,0 +1,2 @@
+rootProject.name='FinanceTracker'
+include ':app'
