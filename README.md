@@ -1,15 +1,14 @@
 # Finance Tracker
-PORA - druga aplikacija
 
-## Namen aplikacije
-* Uporabnik vnaša prihodke in odhodke in s tem sledi svojim financam.
-* Možnost vnosa v več kategorij kot tudi vodenje prihrankov in investicij.
+## Usage and functions
+* User inputs his income and outcome to easily track his spendings and earnings.
+* Function to add more categories
+* Function to add more accounts like savings and investments
 
-## Tehnologije
-* Aplikacija bo ustvarjena v Android studio
-* Za bazo podatkov bom uporabil MySQL Database
-* Za meni bom uporabil Navigation componento
+## Tehnologies
+* Aplication is based in Android Studio
+* MySQL Database is used to store local data
 
-## Slike
+## Pictures
 ![Slika1](/slike/slika1.jpg)
 ![Slika2](/slike/slika2.jpg)
