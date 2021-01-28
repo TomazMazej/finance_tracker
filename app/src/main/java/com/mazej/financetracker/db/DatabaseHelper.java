@@ -48,7 +48,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    private String getDate() { //dobimo current date
+    private String getDate() { //get current date
         SimpleDateFormat dateFormat = new SimpleDateFormat(
                 "dd-MM-yyyy", Locale.getDefault());
         Date date = new Date();

@@ -54,7 +54,6 @@ public class IncomeFragment extends Fragment {
             while(data.moveToNext()) {
                 income = new Income(data.getString(0), data.getString(1), data.getString(2), data.getString(3), data.getString(4));
                 theList.add(0, income);
-                //theList.add(data.getString(1) + " " + data.getString(2) + " " + data.getString(3));
             }
         }
         return view;

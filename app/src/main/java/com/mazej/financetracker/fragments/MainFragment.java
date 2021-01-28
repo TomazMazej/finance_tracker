@@ -1,16 +1,22 @@
 package com.mazej.financetracker.fragments;
 
+import android.app.Activity;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import timber.log.Timber;
 
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Description;
@@ -20,6 +26,7 @@ import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.mazej.financetracker.ApplicationMy;
 import com.mazej.financetracker.MainActivity;
+import com.mazej.financetracker.OnFragmentInteractionListener;
 import com.mazej.financetracker.R;
 import com.mazej.financetracker.db.DatabaseHelper;
 
@@ -38,9 +45,16 @@ public class MainFragment extends Fragment {
     private TextView expenseText;
     private TextView balanceText;
     private PieChart piechart;
+    private ImageButton addIncome;
+    private ImageButton addExpense;
     private double income;
     private double expenses;
     public static double balance;
+    private OnFragmentInteractionListener mListener;
+
+    public MainFragment() {
+        // Required empty public constructor
+    }
 
     @Nullable
     @Override
@@ -57,6 +71,8 @@ public class MainFragment extends Fragment {
         expenseText = (TextView) view.findViewById(R.id.expenseText);
         balanceText = (TextView) view.findViewById(R.id.balanceText);
         piechart = view.findViewById(R.id.piechart);
+        addExpense = view.findViewById(R.id.add_expense);
+        addIncome = view.findViewById(R.id.add_income);
         income = expenses = 0.0;
 
         Calendar c = Calendar.getInstance();
@@ -79,8 +95,6 @@ public class MainFragment extends Fragment {
 
         piechart.setUsePercentValues(true);
         List<PieEntry> values = new ArrayList<>();
-        values.add(new PieEntry((int)income, "Income"));
-        values.add(new PieEntry(100, "Expenses"));
 
         //Pie Chart
         PieDataSet pieDataSet = new PieDataSet(values, "");
@@ -90,11 +104,14 @@ public class MainFragment extends Fragment {
         final int[] MY_COLORS = {Color.rgb(0, 105, 0), Color.rgb(194, 33, 33)};
         ArrayList<Integer> colors = new ArrayList<Integer>();
 
-        if(income != 0.0 || expenses != 0.0){
+        if(income > 0.0 || expenses > 0.0){
+            values.add(new PieEntry((int)income, "Income"));
+            values.add(new PieEntry((int)expenses, "Expenses"));
             for(int i: MY_COLORS) colors.add(i);
         }
         else{
-            colors.add(Color.rgb(0, 0, 105));
+            values.add(new PieEntry(1, "No data"));
+            colors.add(Color.rgb(128,128,128));
         }
 
         pieDataSet.setColors(colors);
@@ -111,6 +128,38 @@ public class MainFragment extends Fragment {
         expenseText.setText("Expenses: " + expenses);
         balanceText.setText("Balance: " + balance);
 
+        addExpense.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.changeFragment(1);
+            }
+        });
+
+        addIncome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.changeFragment(2);
+            }
+        });
+
         return view;
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        try {
+            mListener = (OnFragmentInteractionListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement OnFragmentInteractionListener");
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+
     }
 }

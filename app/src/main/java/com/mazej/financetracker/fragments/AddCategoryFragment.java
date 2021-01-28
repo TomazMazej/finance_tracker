@@ -42,10 +42,10 @@ public class AddCategoryFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                if(newCategory.length()==0 ){ //ce je okence prazno
+                if(newCategory.length()==0 ){ //if we didnt input all the data
                     Toast.makeText(getActivity().getBaseContext(), "Please enter a new category.",Toast.LENGTH_LONG).show();
                 }
-                else { //dodamo podatke v bazo
+                else { //we add data to database
                     myDB.addCategory(newCategory.getText().toString());
                     listener.AddToCategory();
                 }

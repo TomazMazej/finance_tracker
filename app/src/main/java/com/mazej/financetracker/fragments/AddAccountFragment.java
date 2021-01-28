@@ -50,10 +50,10 @@ public class AddAccountFragment extends Fragment {
         add_acc_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(accName.length() == 0 || amount.length() == 0){ //ce je okence prazno
+                if(accName.length() == 0 || amount.length() == 0){ //if we didnt input all the data
                     Toast.makeText(getActivity().getBaseContext(), "Please enter a new account.",Toast.LENGTH_LONG).show();
                 }
-                else { //dodamo podatke v bazo
+                else { //add data to database
                     myDB.addAccount(accName.getText().toString(), amount.getText().toString());
                     listener.AddToAccount();
                     EventBus.getDefault().post(new MessageToastEvent("Account added"));

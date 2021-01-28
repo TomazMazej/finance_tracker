@@ -48,7 +48,7 @@ public class CategoryFragment extends Fragment {
 
         theList = new ArrayList<>();
         arrayAdapter = new ArrayAdapter<String>(getActivity().getBaseContext(), android.R.layout.simple_list_item_1,theList);
-        arrayAdapter2 = new ArrayAdapter<String>(getActivity().getBaseContext(),android.R.layout.simple_list_item_multiple_choice,theList){ //adapter s checkboxi
+        arrayAdapter2 = new ArrayAdapter<String>(getActivity().getBaseContext(),android.R.layout.simple_list_item_multiple_choice,theList){ //checkbox adapter
             @Override
             public View getView(int position, View convertView, ViewGroup parent){
                 View view = super.getView(position,convertView,parent);

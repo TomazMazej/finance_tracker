@@ -1,7 +1,9 @@
 package com.mazej.financetracker.fragments;
 
+import android.app.Activity;
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +14,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.mazej.financetracker.OnFragmentInteractionListener;
 import com.mazej.financetracker.R;
 import com.mazej.financetracker.db.DatabaseHelper;
 import com.mazej.financetracker.onFragmentBtnSelected;
@@ -36,6 +39,7 @@ public class AddExpenseFragment extends Fragment {
     public static EditText amount;
     public static ArrayList<String> theList;
     public static ArrayList<String> theList2;
+    private OnFragmentInteractionListener mListener;
 
     @Nullable
     @Override
@@ -45,6 +49,7 @@ public class AddExpenseFragment extends Fragment {
 
         myDB = new DatabaseHelper(getActivity().getBaseContext());
         toolbar.setTitle("Add Expense");
+        toolbar.setBackgroundColor(Color.parseColor("#C22121"));
 
         data = myDB.getCategories();
         theList = new ArrayList<>();
@@ -75,7 +80,7 @@ public class AddExpenseFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                if(description.length()==0 || amount.length()==0 ){ //ce je okence prazno
+                if(description.length()==0 || amount.length()==0 ){ //if we didnt input all the data
                     Toast.makeText(getActivity().getBaseContext(), "Please enter all the data!.",Toast.LENGTH_LONG).show();
                 }
                 else { //dodamo podatke v bazo
@@ -98,5 +103,22 @@ public class AddExpenseFragment extends Fragment {
         else{
             throw new ClassCastException(context.toString() + " must implement listener");
         }
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        try {
+            mListener = (OnFragmentInteractionListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement OnFragmentInteractionListener");
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
     }
 }

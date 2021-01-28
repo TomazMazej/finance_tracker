@@ -89,4 +89,39 @@
             android:gravity="center"/>
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="55dp"
+        android:layout_marginLeft="55dp"
+        android:layout_marginEnd="56dp"
+        android:layout_marginRight="56dp"
+        android:background="#0000"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:paddingBottom="20dp">
+
+        <ImageButton
+            android:id="@+id/add_income"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_add_circle_outline_black_24dp"
+            android:background="@null"
+            android:tint="#006900"
+            android:paddingRight="50dp"/>
+
+        <ImageButton
+            android:id="@+id/add_expense"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_add_circle_outline_black_24dp"
+            android:background="@null"
+            android:tint="#C22121" />
+
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

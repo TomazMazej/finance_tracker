@@ -7,6 +7,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.NotificationCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -44,7 +45,7 @@ import java.util.Collections;
 
 import static com.mazej.financetracker.fragments.MainFragment.balance;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, onFragmentBtnSelected{
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, onFragmentBtnSelected, OnFragmentInteractionListener{
 
     public static DatabaseHelper myDB;
     private Cursor data;
@@ -83,22 +84,26 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         actionBarDrawerToggle.setDrawerIndicatorEnabled(true);
         actionBarDrawerToggle.syncState();
 
-        //nalozimo default fragment
+        //load default fragment
         fragmentManager = getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.container_fragment, new MainFragment());
         fragmentTransaction.commit();
 
-        //Default kategorije
-        String[] categories = {"Entertainment", "Food & Drinks", "Housing", "Transportation", "Vehicle", "Financial expenses", "Investments"};
+        //default categories
+        String[] categories = {"Entertainment", "Food & Drinks", "Housing", "Transportation", "Vehicle", "Financial expenses", "Investments", "Salary", "Gifts"};
 
-        //ce je prvič, dodamo default kategorije v bazo
+        //if its first time, we add categories in the database
         if(data.getCount() == 0){
             for(int i = 0; i < categories.length; i++){
                 myDB.addCategory(categories[i]);
             }
         }
-        createNotification(myID++, R.drawable.ic_account_balance_black_24dp, "Finance Tracker", "Merry Xmas and Happy new Year!", ApplicationMy.CHANNEL_ID);
+
+        //add cash and savings account if its first time
+        //add functionality to edit account balance
+
+        //createNotification(myID++, R.drawable.ic_account_balance_black_24dp, "Finance Tracker", "Merry Xmas and Happy new Year!", ApplicationMy.CHANNEL_ID);
     }
 
     @Override
@@ -111,7 +116,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) { //pohendla gumbe na toolbaru
+    public boolean onOptionsItemSelected(MenuItem item) { //handles toolbar buttons
         Cursor data;
         Income income;
         switch(item.getItemId()) {
@@ -201,7 +206,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) { //pohendla gumbe v side nav baru
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) { //handles side nav buttons
         hideButtons();
         drawerLayout.closeDrawer(GravityCompat.START);
         fragmentManager = getSupportFragmentManager();
@@ -244,7 +249,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @Override
-    public void CategoryToAdd() { //kličemo ko se prestavimo iz Category fragment v AddCategory fragment
+    public void CategoryToAdd() {
         hideButtons();
         fragmentManager = getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
@@ -253,7 +258,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @Override
-    public void AddToCategory() { //kličemo ko se prestavimo iz AddCategory fragment v Category fragment
+    public void AddToCategory() {
         hideButtons();
         AddCategoryFragment.newCategory.onEditorAction(EditorInfo.IME_ACTION_DONE);
         myMenu.findItem(R.id.add_category_btn).setVisible(true);
@@ -263,7 +268,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fragmentTransaction.commit();
     }
 
-    public void IncomeToAdd(){ //iz income v add income
+    public void IncomeToAdd(){
         hideButtons();
         fragmentManager = getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
@@ -271,7 +276,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fragmentTransaction.commit();
     }
 
-    public void AddToIncome(){ //iz add income v income
+    public void AddToIncome(){
         hideButtons();
         AddIncomeFragment.amount.onEditorAction(EditorInfo.IME_ACTION_DONE);
         myMenu.findItem(R.id.add_income_btn).setVisible(true);
@@ -282,7 +287,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fragmentTransaction.commit();
     }
 
-    public void ExpenseToAdd(){ //iz income v add income
+    public void ExpenseToAdd(){
         hideButtons();
         fragmentManager = getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
@@ -290,7 +295,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fragmentTransaction.commit();
     }
 
-    public void AddToExpense(){ //iz add income v income
+    public void AddToExpense(){
         hideButtons();
         AddExpenseFragment.amount.onEditorAction(EditorInfo.IME_ACTION_DONE);
         myMenu.findItem(R.id.add_expense_btn).setVisible(true);
@@ -301,7 +306,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fragmentTransaction.commit();
     }
 
-    public void AccountToAdd(){ //iz add income v income
+    public void AccountToAdd(){
         hideButtons();
         fragmentManager = getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
@@ -309,7 +314,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fragmentTransaction.commit();
     }
 
-    public void AddToAccount(){ //iz add income v income
+    public void AddToAccount(){
         hideButtons();
         AddAccountFragment.amount.onEditorAction(EditorInfo.IME_ACTION_DONE);
         myMenu.findItem(R.id.add_account_btn).setVisible(true);
@@ -319,7 +324,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fragmentTransaction.commit();
     }
 
-    public static void hideButtons(){ //skrijemo vse gumbe
+    @Override
+    public void changeFragment(int id){ //when we want to get from main fragment to add expense/income
+        if (id == 1) {
+            fragmentManager = getSupportFragmentManager();
+            fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.container_fragment, new AddExpenseFragment());
+            fragmentTransaction.commit();
+        }
+        else if (id == 2) {
+            fragmentManager = getSupportFragmentManager();
+            fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.container_fragment, new AddIncomeFragment());
+            fragmentTransaction.commit();
+        }
+    }
+
+    public static void hideButtons(){ //hides all the toolbar buttons
         myMenu.findItem(R.id.general).setVisible(false);
         myMenu.findItem(R.id.other).setVisible(false);
         myMenu.findItem(R.id.delete_account_btn).setVisible(false);
@@ -333,7 +354,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         myMenu.findItem(R.id.date_range).setVisible(false);
     }
 
-    private void createNotification(int nId, int iconRes, String title, String body, String channelId) {
+    private void createNotification(int nId, int iconRes, String title, String body, String channelId) { //creates a notification
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(
                 this, channelId).setSmallIcon(iconRes)
                 .setContentTitle(title).setContentText(body);
