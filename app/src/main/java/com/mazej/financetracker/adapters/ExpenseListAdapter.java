@@ -9,6 +9,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
+import com.mazej.financetracker.ApplicationMy;
 import com.mazej.financetracker.MainActivity;
 import com.mazej.financetracker.R;
 import com.mazej.financetracker.objects.Expense;
@@ -64,7 +65,7 @@ public class ExpenseListAdapter  extends ArrayAdapter<Expense> {
         tvDate.setText(date);
         tvCategory.setText(category);
         tvDescription.setText(description);
-        tvAmount.setText(amount);
+        tvAmount.setText(amount + " " + ApplicationMy.currency);
 
         simpleCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override

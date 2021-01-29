@@ -9,4 +9,7 @@ public interface onFragmentBtnSelected{
     void ExpenseToAdd();
     void AccountToAdd();
     void AddToAccount();
+    void AccountToEdit();
+    void EditToAccount();
+    void SettingsToMain();
 }

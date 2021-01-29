@@ -85,7 +85,7 @@ public class AddExpenseFragment extends Fragment {
                 }
                 else { //dodamo podatke v bazo
                     myDB.addExpenses(category_dropdown.getSelectedItem().toString(), description.getText().toString(), amount.getText().toString());
-                    myDB.addToAccount(account_dropdown.getSelectedItem().toString(), amount.getText().toString());
+                    myDB.removeFromAccount(account_dropdown.getSelectedItem().toString(), amount.getText().toString());
                     listener.AddToExpense();
                 }
             }

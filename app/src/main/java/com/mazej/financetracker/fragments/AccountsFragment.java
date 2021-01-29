@@ -10,6 +10,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.mazej.financetracker.ApplicationMy;
 import com.mazej.financetracker.MainActivity;
 import com.mazej.financetracker.R;
 import com.mazej.financetracker.adapters.AccountsListAdapter;
@@ -63,7 +64,7 @@ public class AccountsFragment extends Fragment {
                 balance += Integer.parseInt(data.getString(2));
             }
         }
-        totalBalance.setText("Total: " + balance);
+        totalBalance.setText("Total: " + balance + " " + ApplicationMy.currency);
         return view;
     }
 }

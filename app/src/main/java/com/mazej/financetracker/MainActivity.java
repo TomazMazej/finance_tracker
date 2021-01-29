@@ -33,10 +33,12 @@ import com.mazej.financetracker.fragments.AddCategoryFragment;
 import com.mazej.financetracker.fragments.AddExpenseFragment;
 import com.mazej.financetracker.fragments.AddIncomeFragment;
 import com.mazej.financetracker.fragments.CategoryFragment;
+import com.mazej.financetracker.fragments.EditAccountFragment;
 import com.mazej.financetracker.fragments.ExpenseFragment;
 import com.mazej.financetracker.fragments.IncomeFragment;
 import com.mazej.financetracker.fragments.MainFragment;
 import com.mazej.financetracker.db.DatabaseHelper;
+import com.mazej.financetracker.fragments.SettingsFragment;
 import com.mazej.financetracker.objects.Income;
 
 import java.util.ArrayList;
@@ -67,7 +69,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
 
         myDB = new DatabaseHelper(this);
-        data = myDB.getCategories();
         myID = (int)(System.currentTimeMillis()%1000000);
         deleteList = new ArrayList<>();
 
@@ -94,15 +95,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         String[] categories = {"Entertainment", "Food & Drinks", "Housing", "Transportation", "Vehicle", "Financial expenses", "Investments", "Salary", "Gifts"};
 
         //if its first time, we add categories in the database
+        data = myDB.getCategories();
         if(data.getCount() == 0){
             for(int i = 0; i < categories.length; i++){
                 myDB.addCategory(categories[i]);
             }
         }
 
-        //add cash and savings account if its first time
-        //add functionality to edit account balance
-
+        data = myDB.getAccounts();
+        if(data.getCount() == 0){
+            myDB.addAccount("Cash", "0");
+            myDB.addAccount("Savings", "0");
+        }
         //createNotification(myID++, R.drawable.ic_account_balance_black_24dp, "Finance Tracker", "Merry Xmas and Happy new Year!", ApplicationMy.CHANNEL_ID);
     }
 
@@ -172,6 +176,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.add_category_btn:
                 CategoryToAdd();
                 break;
+            case R.id.edit_acc_btn:
+                AccountToEdit();
+                break;
             case R.id.today:
                 data = myDB.getTodayIncome();
                 IncomeFragment.theList.clear();
@@ -233,6 +240,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if(menuItem.getItemId() == R.id.accounts){
             myMenu.findItem(R.id.delete_account_btn).setVisible(true);
             myMenu.findItem(R.id.add_account_btn).setVisible(true);
+            myMenu.findItem(R.id.edit_acc_btn).setVisible(true);
             fragmentTransaction.replace(R.id.container_fragment, new AccountsFragment());
         }
 
@@ -242,7 +250,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
         if(menuItem.getItemId() == R.id.settings){
-
+            fragmentTransaction.replace(R.id.container_fragment, new SettingsFragment());
         }
         fragmentTransaction.commit();
         return true;
@@ -317,10 +325,40 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void AddToAccount(){
         hideButtons();
         AddAccountFragment.amount.onEditorAction(EditorInfo.IME_ACTION_DONE);
+        myMenu.findItem(R.id.delete_account_btn).setVisible(true);
         myMenu.findItem(R.id.add_account_btn).setVisible(true);
+        myMenu.findItem(R.id.edit_acc_btn).setVisible(true);        fragmentManager = getSupportFragmentManager();
+        fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.container_fragment, new AccountsFragment());
+        fragmentTransaction.commit();
+    }
+
+    public void AccountToEdit(){
+        hideButtons();
+        fragmentManager = getSupportFragmentManager();
+        fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.container_fragment, new EditAccountFragment());
+        fragmentTransaction.commit();
+    }
+
+    public void EditToAccount(){
+        hideButtons();
+        EditAccountFragment.amount.onEditorAction(EditorInfo.IME_ACTION_DONE);
+        myMenu.findItem(R.id.delete_account_btn).setVisible(true);
+        myMenu.findItem(R.id.add_account_btn).setVisible(true);
+        myMenu.findItem(R.id.edit_acc_btn).setVisible(true);
         fragmentManager = getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.container_fragment, new AccountsFragment());
+        fragmentTransaction.commit();
+    }
+
+    public void SettingsToMain(){
+        hideButtons();
+        SettingsFragment.budged.onEditorAction(EditorInfo.IME_ACTION_DONE);
+        fragmentManager = getSupportFragmentManager();
+        fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.container_fragment, new MainFragment());
         fragmentTransaction.commit();
     }
 
@@ -352,6 +390,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         myMenu.findItem(R.id.add_category_btn).setVisible(false);
         myMenu.findItem(R.id.add_account_btn).setVisible(false);
         myMenu.findItem(R.id.date_range).setVisible(false);
+        myMenu.findItem(R.id.edit_acc_btn).setVisible(false);
     }
 
     private void createNotification(int nId, int iconRes, String title, String body, String channelId) { //creates a notification

@@ -186,6 +186,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.update(TABLE_ACCOUNTS, args, ACCOUNT_NAME + " = '" + acc_name + "'", null);
     }
 
+    public void editAccount(String acc_name, String amount) {
+        int new_amount = Integer.parseInt(amount);
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues args = new ContentValues();
+        args.put(AMOUNT, new_amount);
+        db.update(TABLE_ACCOUNTS, args, ACCOUNT_NAME + " = '" + acc_name + "'", null);
+    }
+
     public void removeFromAccount(String acc_name, String amount) {
         int new_amount =  Integer.parseInt(getAccountAmount(acc_name)) - Integer.parseInt(amount);
 
