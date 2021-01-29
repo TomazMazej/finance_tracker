@@ -54,7 +54,7 @@ public class AccountsListAdapter extends ArrayAdapter<Account> {
         simpleCheckBox = (CheckBox) convertView.findViewById(R.id.simpleCheckBox);
 
         tvName.setText(accountName);
-        tvAmount.setText(amount + ApplicationMy.currency);
+        tvAmount.setText(amount + " " + ApplicationMy.currency);
 
         simpleCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override

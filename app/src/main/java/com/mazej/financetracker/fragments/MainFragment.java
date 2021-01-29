@@ -53,7 +53,6 @@ public class MainFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
 
     public MainFragment() {
-        // Required empty public constructor
     }
 
     @Nullable
@@ -64,6 +63,7 @@ public class MainFragment extends Fragment {
 
         myDB = new DatabaseHelper(getActivity().getBaseContext());
         toolbar.setBackgroundColor(Color.parseColor("#455a64"));
+        toolbar.setTitleTextColor(Color.WHITE);
         toolbar.setTitle("Home");
 
         currentDate = (TextView) view.findViewById(R.id.dateText);
