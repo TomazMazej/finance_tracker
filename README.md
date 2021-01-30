@@ -1,4 +1,5 @@
 # Finance Tracker
+A simple application for tracking your finances.
 
 ## Usage and functions
 * User inputs his income and outcome to easily track his spendings and earnings.
