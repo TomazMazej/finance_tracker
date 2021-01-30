@@ -58,9 +58,9 @@ public class SettingsFragment extends Fragment {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity().getBaseContext(), android.R.layout.simple_spinner_dropdown_item, theList);
         currencies_dropdown.setAdapter(adapter);
 
-        fullName.setText(ApplicationMy.sp.getString("fullName","DEFAULT VALUE ERR"));
-        email.setText(ApplicationMy.sp.getString("email","DEFAULT VALUE ERR"));
-        budged.setText(ApplicationMy.sp.getString("budged","DEFAULT VALUE ERR"));
+        fullName.setText(ApplicationMy.sp.getString("fullName",""));
+        email.setText(ApplicationMy.sp.getString("email",""));
+        budged.setText(ApplicationMy.sp.getString("budged",""));
 
         save_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,7 +68,12 @@ public class SettingsFragment extends Fragment {
                 SharedPreferences.Editor editor = ApplicationMy.sp.edit();
                 editor.putString("fullName", fullName.getText().toString());
                 editor.putString("email", email.getText().toString());
-                editor.putString("budged", budged.getText().toString());
+                if(budged.getText().toString().equals("")){
+                    editor.putString("budged", "1000000000");
+                }
+                else{
+                    editor.putString("budged", budged.getText().toString());
+                }
                 editor.putString("currency", currencies_dropdown.getSelectedItem().toString());
                 editor.apply();
                 ApplicationMy.currency = currencies_dropdown.getSelectedItem().toString();

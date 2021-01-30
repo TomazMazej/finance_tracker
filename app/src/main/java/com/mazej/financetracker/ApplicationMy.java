@@ -22,6 +22,7 @@ public class ApplicationMy extends Application {
     public static SharedPreferences sp;
     public static String currency;
     private String idAPP;
+    public static boolean firstTime = false;
 
     @Override
     public void onCreate() {
@@ -41,6 +42,7 @@ public class ApplicationMy extends Application {
             SharedPreferences.Editor editor = sp.edit();
             editor.putString(APP_ID, idAPP);
             editor.apply();
+            firstTime = true;
         }
         Log.d(TAG,"appID:" + idAPP);
     }

@@ -13,7 +13,7 @@ import java.util.Locale;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-    public static final String DATABASE_NAME = "DB1";
+    public static final String DATABASE_NAME = "DB2";
 
     public static final String TABLE_INCOME = "income_data";
     public static final String TABLE_CATEGORY = "category_data";

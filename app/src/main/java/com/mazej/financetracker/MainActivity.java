@@ -1,32 +1,17 @@
 package com.mazej.financetracker;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.app.NotificationCompat;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
-import android.app.DatePickerDialog;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.database.Cursor;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.inputmethod.EditorInfo;
-import android.widget.DatePicker;
 
 import com.google.android.material.navigation.NavigationView;
+import com.mazej.financetracker.db.DatabaseHelper;
 import com.mazej.financetracker.fragments.AccountsFragment;
 import com.mazej.financetracker.fragments.AddAccountFragment;
 import com.mazej.financetracker.fragments.AddCategoryFragment;
@@ -37,15 +22,21 @@ import com.mazej.financetracker.fragments.EditAccountFragment;
 import com.mazej.financetracker.fragments.ExpenseFragment;
 import com.mazej.financetracker.fragments.IncomeFragment;
 import com.mazej.financetracker.fragments.MainFragment;
-import com.mazej.financetracker.db.DatabaseHelper;
 import com.mazej.financetracker.fragments.SettingsFragment;
 import com.mazej.financetracker.objects.Income;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 
-import static com.mazej.financetracker.fragments.MainFragment.balance;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.NotificationCompat;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, onFragmentBtnSelected, OnFragmentInteractionListener{
 
@@ -60,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
     private static int myID=100;
+    private double expenses = 0.0;
 
     public static ArrayList<Integer> deleteList;
 
@@ -107,7 +99,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             myDB.addAccount("Cash", "0");
             myDB.addAccount("Savings", "0");
         }
-        //createNotification(myID++, R.drawable.ic_account_balance_black_24dp, "Finance Tracker", "Merry Xmas and Happy new Year!", ApplicationMy.CHANNEL_ID);
+
+        data = myDB.getMonthExpenses();
+        while(data.moveToNext()) {
+            expenses += Double.parseDouble(data.getString(3));
+        }
+
+        if(ApplicationMy.firstTime){
+            createNotification(myID++, R.drawable.ic_account_balance_black_24dp, "Finance Tracker", "Greetings! Please set your budged and prefered currency in settings tab. \n Thank you for using Finance Tracker!", ApplicationMy.CHANNEL_ID);
+        }
+        else if(expenses > Integer.parseInt(ApplicationMy.sp.getString("budged","DEFAULT VALUE ERR"))){
+            createNotification(myID++, R.drawable.ic_account_balance_black_24dp, "Finance Tracker", "You have reached your budged! Spend wisely!", ApplicationMy.CHANNEL_ID);
+        }
     }
 
     @Override

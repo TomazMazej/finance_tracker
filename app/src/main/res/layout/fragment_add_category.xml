@@ -5,19 +5,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:errorEnabled="true"
-        android:layout_marginTop="?attr/actionBarSize">
+        android:text="Category name:"
+        android:paddingLeft="5dp"
+        android:textSize="20dp"
+        android:textColor="@color/colorPrimaryDark"
+        android:fontFamily="@font/buttermill"
+        android:layout_marginTop="?attr/actionBarSize"/>
 
-        <EditText
+    <EditText
             android:id="@+id/newCategory"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Category name"
+            android:hint="Shopping"
             android:inputType="text"/>
-    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/add_category_btn"

@@ -4,13 +4,33 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Category:"
+        android:paddingLeft="5dp"
+        android:textSize="20dp"
+        android:textColor="@color/colorPrimaryDark"
+        android:fontFamily="@font/buttermill"
+        android:layout_marginTop="?attr/actionBarSize"/>
+
     <Spinner
         android:id="@+id/spinner1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="?attr/actionBarSize"
         android:background="@android:drawable/btn_dropdown"
         android:spinnerMode="dropdown"/>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="5dp"
+        android:textSize="20dp"
+        android:text="Account:"
+        android:textColor="@color/colorPrimaryDark"
+        android:fontFamily="@font/buttermill" />
 
     <Spinner
         android:id="@+id/spinner2"
@@ -19,18 +39,38 @@
         android:background="@android:drawable/btn_dropdown"
         android:spinnerMode="dropdown"/>
 
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="5dp"
+        android:textSize="20dp"
+        android:text="Description:"
+        android:textColor="@color/colorPrimaryDark"
+        android:fontFamily="@font/buttermill" />
+
     <EditText
         android:id="@+id/description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Description"
+        android:hint="Pay day"
         android:inputType="text"/>
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="5dp"
+        android:textSize="20dp"
+        android:text="Amount:"
+        android:textColor="@color/colorPrimaryDark"
+        android:fontFamily="@font/buttermill" />
 
     <EditText
         android:id="@+id/amount"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Amount"
+        android:hint="1500"
         android:inputType="numberDecimal"/>
 
     <Button

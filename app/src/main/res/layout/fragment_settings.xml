@@ -4,27 +4,66 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Full name:"
+        android:paddingLeft="5dp"
+        android:textSize="20dp"
+        android:textColor="@color/colorPrimaryDark"
+        android:fontFamily="@font/buttermill"        android:layout_marginTop="?attr/actionBarSize"/>
+
     <EditText
         android:id="@+id/fullName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Full Name"
-        android:inputType="text"
-        android:layout_marginTop="?attr/actionBarSize" />
+        android:hint="Johny Walker"
+        android:inputType="text" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="E-mail:"
+        android:paddingLeft="5dp"
+        android:textSize="20dp"
+        android:textColor="@color/colorPrimaryDark"
+        android:fontFamily="@font/buttermill" />
 
     <EditText
         android:id="@+id/email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="E-mail"
+        android:hint="example@gmail.com"
         android:inputType="text" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Budged:"
+        android:paddingLeft="5dp"
+        android:textSize="20dp"
+        android:textColor="@color/colorPrimaryDark"
+        android:fontFamily="@font/buttermill" />
 
     <EditText
         android:id="@+id/budged"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Monthly budged"
+        android:hint="500"
         android:inputType="numberDecimal"/>
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Currency:"
+        android:paddingLeft="5dp"
+        android:textSize="20dp"
+        android:textColor="@color/colorPrimaryDark"
+        android:fontFamily="@font/buttermill" />
 
     <Spinner
         android:id="@+id/currencies"

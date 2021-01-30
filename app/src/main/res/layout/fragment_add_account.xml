@@ -5,19 +5,39 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Account name:"
+        android:paddingLeft="5dp"
+        android:textSize="20dp"
+        android:textColor="@color/colorPrimaryDark"
+        android:fontFamily="@font/buttermill"
+        android:layout_marginTop="?attr/actionBarSize"/>
+
     <EditText
         android:id="@+id/accName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Account name"
-        android:inputType="text"
-        android:layout_marginTop="?attr/actionBarSize"/>
+        android:hint="Investments"
+        android:inputType="text" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Amount:"
+        android:paddingLeft="5dp"
+        android:textSize="20dp"
+        android:textColor="@color/colorPrimaryDark"
+        android:fontFamily="@font/buttermill" />
 
     <EditText
         android:id="@+id/amount"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Amount"
+        android:hint="1000"
         android:inputType="numberDecimal"/>
 
     <Button
