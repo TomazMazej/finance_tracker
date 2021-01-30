@@ -10,5 +10,8 @@
 * MySQL Database is used to store local data
 
 ## Pictures
-![Slika1](/slike/slika1.jpg)
-![Slika2](/slike/slika2.jpg)
+![Image1](/pictures/ft1.png)
+![Image2](/pictures/ft2.png)
+![Image3](/pictures/ft3.png)
+![Image4](/pictures/ft4.png)
+![Image5](/pictures/ft5.png)
