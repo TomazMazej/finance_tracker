@@ -8,7 +8,7 @@ A simple application for tracking your finances.
 
 ## Tehnologies
 * Aplication is based in Android Studio
-* MySQL Database is used to store local data
+* SQLite Database is used to store local data
 
 ## Pictures
 ![Image1](/pictures/ft1.png)
